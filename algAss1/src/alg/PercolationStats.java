@@ -1,5 +1,6 @@
 package alg;
 
+import stdlib.StdOut;
 import stdlib.StdRandom;
 import stdlib.StdIn;
 
@@ -28,14 +29,14 @@ public class PercolationStats {
 				   Percolation current = new Percolation(N);
 				   int count = 0;
 				   while(!current.percolates()){
-					   int i = StdRandom.uniform(N);
-					   int j = StdRandom.uniform(N);
+					   int i = StdRandom.uniform(N) + 1;
+					   int j = StdRandom.uniform(N) + 1;
 					   if(!current.isOpen(i, j)){
 						   current.open(i,j);
 						   count++;
 					   }
 				   }
-				   this.threshold[t] = (double)count/(N*N);
+				   threshold[t] = (double)count/(double)(N*N);
 				   sum += threshold[t];  
 		   }
 	   }    
@@ -71,7 +72,19 @@ public class PercolationStats {
 		   
 		   int N = StdIn.readInt();
 		   int T = StdIn.readInt();
-		   PercolationStats per = new PercolationStats(N, T);
+	       if (args.length > 0) {
+	            try {
+	                N = Integer.parseInt(args[0]);
+	                T = Integer.parseInt(args[1]);
+	            } catch (NumberFormatException e) {
+	                System.err.print("You have not put in a number");
+	            }
+	       }
+		   PercolationStats current = new PercolationStats(N, T);
+		   StdOut.println(current.mean + " mean");
+		   StdOut.println(current.stDev + "standard dev ");
+		   StdOut.println(current.confidenceLo() + " lower confidence interval");
+		   StdOut.println(current.confidenceHi() + " upper confidence interval ");
 		   
 	   }   
 }

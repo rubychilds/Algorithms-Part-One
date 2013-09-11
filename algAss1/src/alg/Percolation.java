@@ -28,33 +28,40 @@ public class Percolation {
        if (i <= 0 || i > max) throw 
            new IndexOutOfBoundsException("row index i out of bounds");
        if (j <= 0 || j > max) throw 
-           new IndexOutOfBoundsException("column index i out of bounds");
+           new IndexOutOfBoundsException("column index j out of bounds");
        
    }
    
    // open site (row i, column j) if it is not already
    public void open(int i, int j){
 	   
+	   // must think of it as a grid
+	   
+	   /*          Col j
+	    *         |    |
+	    *  R  ____|____|____ 
+	    *  o      |    |
+	    *  w  ____|____|____ 
+	    *         |    |
+	    *  i      |    |  
+	    * 
+	    */	   
 	   // can't open something that is out of bounds
-	   validationIndeces( i,j);
-	   // if its in the base row
-	   if(i == 0){
-		   uf.union(max-1*max-1, j);
-		   if(isOpen(i+1, j))
-			   uf.union(max-1*max-1, max*i+j);   	
-	   }
-	     else
-         {
-             if (i-2 >= 0 && isOpen(i-1, j))
-                 uf.union(max*(i-1)+j-1, max*(i-2)+(j-1));
-             if (i < max & isOpen(i+1, j))
-                  uf.union(max*(i-1)+j-1, max*i+(j-1));
-             if (j-2 >= 0 && isOpen(i, j-1))
-                 uf.union(max*(i-1)+j-1, max*(i-1)+(j-2));
-             if (j < max && isOpen(i, j+1))
-                  uf.union(max*(i-1)+j-1, max*(i-1)+j);
-         }
-	   this.grid[i][j] = true;
+	   validationIndeces(i,j);
+	   // open this one
+	   grid[i][j] = true;
+	   
+	   // Checks i's
+	   if(i > 1 && isOpen(i-1, j))
+		   uf.union(max*(i-1) + j-1, max*i-2 + j-1);
+       if (i < max & isOpen(i+1, j))
+    	   uf.union(max*(i-1) + j-1, max*i+(j-1));
+       
+       // checks j's
+       if (j > 1 && isOpen(i, j-1))
+    	   uf.union(max*(i-1) + j-1, max*(i-1)+(j-2));
+       if (j < max && isOpen(i, j+1))
+    	   uf.union(max*(i-1) + j-1, max*(i-1) + j);
  
    }
    
@@ -62,7 +69,7 @@ public class Percolation {
    public boolean isOpen(int i, int j){
 	   validationIndeces( i,j);
 	   // this grids entries are set to false, and only true if open, hence we return this val directly
-	   return this.grid[i][j];
+	   return grid[i][j];
    }    
    
    // is site (row i, column j) full?

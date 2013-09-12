@@ -1,7 +1,4 @@
-package alg;
 
-import stdlib.StdIn;
-import stdlib.StdOut;
 
 /****************************************************************************
  *  Compilation:  javac QuickFindUF.java

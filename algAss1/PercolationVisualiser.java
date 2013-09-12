@@ -1,7 +1,4 @@
-package alg;
 
-import stdlib.StdDraw;
-import stdlib.StdIn;
 import java.awt.Font;
 
 public class PercolationVisualiser {
@@ -43,7 +40,7 @@ public class PercolationVisualiser {
 
     public static void main(String[] args) {
 
-    	int N = 0;
+     int N = 0;
         if (args.length > 0) {
             try {
                 N = Integer.parseInt(args[0]);
@@ -52,7 +49,7 @@ public class PercolationVisualiser {
             }
        }
         else 
-        	N = StdIn.readInt();
+         N = StdIn.readInt();
         
         // repeatedly read in sites to open and draw resulting system
         Percolation p = new Percolation(N);

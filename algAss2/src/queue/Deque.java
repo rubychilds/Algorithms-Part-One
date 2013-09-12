@@ -19,23 +19,54 @@ public class Deque<Item> implements Iterable<Item> {
 	   return size == 0;
    }           
    
+   // return the number of items on the deque
    public int size(){
 	   return size;
-   }                  // return the number of items on the deque
+   }                  
    
+   // insert the item at the front
    public void addFirst(Item item){
 	   if(item == null)
 		   throw new NoSuchElementException();
-	   
-
-   }    // insert the item at the front
+	   else{
+			
+			Node<Item> current = new Node<Item>();   
+			current.setItem(item);
+			current.setNext(head);
+			current.setPrev(null);
+			if(isEmpty()){
+				head = tail = current;
+			}
+			else{
+				head.setPrev(current);
+				head = current;
+			}
+			size++;   
+		   }
+   }   
    
+   // insert the item at the end
    public void addLast(Item item){
 	   if(item == null)
 		   throw new NoSuchElementException();
-	   
-   }     // insert the item at the end
-   
+	   else{
+		Node<Item> current = new Node<Item>();
+		current.setItem(item);
+		current.setPrev(tail);
+		current.setNext(null);
+		
+		if(isEmpty()){
+			head = tail = current;	
+		}
+		else{
+			tail.setNext(current);
+			tail = current;
+		}
+		size++;
+	   }   
+   }     
+
+   // delete and return the item at the front
    public Item removeFirst(){
 	   
 	   if(!isEmpty()){
@@ -48,48 +79,59 @@ public class Deque<Item> implements Iterable<Item> {
 		   else {
 			   head.getNext().setPrev(null);
 			   head = head.getNext();
-		   }
-		
+		   }	
 		   return item;
 	   }
 	   else 
 		   throw new NoSuchElementException();
-   }          // delete and return the item at the front
+   }          
    
+   // delete and return the item at the end
    public Item removeLast(){
 	   if(!isEmpty()){
-		   
+		   Item item = tail.getItem();
+		   size--;
+		   if(isEmpty()){
+			   head = null;
+			   tail = null;
+		   }
+		   else{
+			   tail.getPrev().setNext(null);
+			   tail = tail.getPrev();
+		   }
+		   return item;
 	   }
 	   else 
-		   throw new NoSuchElementException();
-	   
-   }           // delete and return the item at the end
+		   throw new NoSuchElementException();   
+   }          
    
    public Iterator<Item> iterator(){
 	   return new DequeIt();
    }   // return an iterator over items in order from front to end
 
    private class DequeIt implements Iterator<Item>{
-	   
-		public DequeIt(){
-			
-		}
+	   	private Node<Item> current = head;
+	   	
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			return current.getNext() != null;
 		}
 
 		@Override
 		public Item next() {
-			// TODO Auto-generated method stub
-			return null;
+			if(current == null)
+				throw new NoSuchElementException();
+			else{
+				Item temp = current.getItem();
+				current = ((Node<Item>) temp).getNext();
+				return temp;
+		
+			}
 		}
 
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
-			
 		}
    }
    

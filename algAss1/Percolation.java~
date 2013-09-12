@@ -7,7 +7,7 @@ public class Percolation{
     private int max;
     private WeightedQuickUnionUF uf;
     
-    public Percolation(int N){
+    public Percolation2(int N){
         max = N;
         grid = new boolean[max*max];
         for(int index = 0; index < grid.length; index++)

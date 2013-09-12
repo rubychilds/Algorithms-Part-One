@@ -8,6 +8,9 @@ public class PercolationStats {
     private double minConfInt = 0;
     private double maxConfInt = 0;
     private double[] percolateValues;
+    private double percolateValue = 0;
+    private int randomRowSelect;
+    private int randomColumnSelect;
     
     public PercolationStats(int N, int T){
         validationIndeces(N, T);

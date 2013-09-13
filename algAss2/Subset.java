@@ -1,36 +1,24 @@
-package queue;
-import stdlib.StdIn;
-import stdlib.StdOut;
+import java.util.Iterator;
 
 public class Subset {
-	 public static void main(String[] args){
-		 int k = 0;
-		 if (args.length == 1 ){
-			 try {
-				 k = Integer.parseInt(args[0]);
-			 }
-			 catch(NumberFormatException e) { 
-			 }
-		 }
-		 else {
-			 StdOut.printf("Not enough arguments.");
-		 }
-		 
-		 RandomizedQueue<String> queue = new RandomizedQueue<String>();
-		 
-		   // gets values and opens corresponding grid condition
-		   if (!StdIn.isEmpty()) {
-	           String input = StdIn.readString();
-	           queue.enqueue(input);
-	           int index = 0;
-	           while (index < k){
-	        	   StdOut.println(queue.dequeue());
-	        	   index++;
-	           }
-		   }
-		   else
-			   StdOut.printf("No input string");
-		 
-		   
-	 }
+  public static void main(String[] args){
+  
+   RandomizedQueue<String> queue = new RandomizedQueue<String>();
+   int k = Integer.parseInt(args[0]);
+   
+   while (!StdIn.isEmpty()) {
+       String current = StdIn.readString();
+       queue.enqueue(current);
+   }
+   
+   if (k > queue.size())
+       k = queue.size();  
+  
+  Iterator<String> iterate = queue.iterator();
+  
+  while (k >= 0 && iterate.hasNext()) {
+      StdOut.println(" " + iterate.next());
+      k--;
+  }
+}
 }

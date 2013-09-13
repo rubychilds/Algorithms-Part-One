@@ -3,22 +3,21 @@
  */
 public class PercolationStats {
     private Percolation p;
-    private double mean = 0;
-    private double stdDev = 0;
-    private double minConfInt = 0;
-    private double maxConfInt = 0;
+    //private double mean = 0;
+  //  private double stdDev = 0;
     private double[] percolateValues;
-    
+    private int T =0;
     public PercolationStats(int N, int T){
         validationIndeces(N, T);
+        this.T = T;
         percolateValues = new double[T];
         for (int i = 0; i < T; ++i) {
             p = new Percolation(N);
             int count =0;
             while (!p.percolates()) {
-                int row = StdRandom.uniform(N);
-                int col = StdRandom.uniform(N);
-               // StdOut.println("row: " + row + " col: " + col);
+                int row = StdRandom.uniform(N)+1;
+                int col = StdRandom.uniform(N)+1;
+               // StdOut.println("in stats row: " + row + " col: " + col);
                 if (!p.isOpen(row, col)) {
                     p.open(row, col);
                     count++;
@@ -38,6 +37,15 @@ public class PercolationStats {
     public double stddev(){
         return StdStats.stddev(percolateValues);
     }
+    public double confidenceLo(){
+     return mean() - (1.96*stddev())/(T^(1/2));
+    }
+
+    public double confidenceHi(){
+     return mean() + (1.96*stddev())/(T^(1/2));
+    }
+
+
     public static void main(String[] args){
         int N = 0;
         int T = 0;        
@@ -51,10 +59,16 @@ public class PercolationStats {
             //System.out.println (N) ;
             //System.out.println (T) ;
         }
+        else {
+            N = StdIn.readInt();
+            T = StdIn.readInt();
+        }
         
         PercolationStats pStats = new PercolationStats(N, T);
-        System.out.println(pStats.mean());
-        System.out.println(pStats.stddev());
+        System.out.println("Mean: " + pStats.mean());
+        System.out.println("Standard dev " + pStats.stddev());
+        System.out.println("Confidence lower bound " + pStats.confidenceLo());
+        System.out.println("Confidence upper bound " + pStats.confidenceHi());
     }
     
     

@@ -1,7 +1,5 @@
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.lang.UnsupportedOperationException;
 
 public class Deque<Item> implements Iterable<Item> {
  
@@ -10,8 +8,8 @@ public class Deque<Item> implements Iterable<Item> {
  private Node<Item> tail;
  // construct an empty deque
    public Deque() {
-    this.head = null;
-    this.tail = null;
+    head = null;
+    tail = null;
     size = 0;
    }
    
@@ -72,7 +70,7 @@ public class Deque<Item> implements Iterable<Item> {
     
     if (!isEmpty()) {
      Item item = head.getItem();
-     size--;
+     
      if (isEmpty()) {
       head = null;
       tail = null;
@@ -80,7 +78,8 @@ public class Deque<Item> implements Iterable<Item> {
      else {
       head.getNext().setPrev(null);
       head = head.getNext();
-     } 
+     }
+     size--;
      return item;
     }
     else 
@@ -91,7 +90,7 @@ public class Deque<Item> implements Iterable<Item> {
    public Item removeLast() {
     if (!isEmpty()) {
      Item item = tail.getItem();
-     size--;
+     
      if (isEmpty()) {
       head = null;
       tail = null;
@@ -100,6 +99,7 @@ public class Deque<Item> implements Iterable<Item> {
       tail.getPrev().setNext(null);
       tail = tail.getPrev();
      }
+     size--;
      return item;
     }
     else 
@@ -124,7 +124,7 @@ public class Deque<Item> implements Iterable<Item> {
     throw new NoSuchElementException();
    else {
     Item temp = current.getItem();
-    current = ((Node<Item>) temp).getNext();
+    current = current.getNext();
     return temp;
   
    }
@@ -146,22 +146,22 @@ public class Deque<Item> implements Iterable<Item> {
     public Item getItem() {
      return item;
     }
-    public void setItem(Item item) {
-     this.item = item;
+    public void setItem(Item that) {
+     item = that;
     }
     // deals with next item to the node
     public Node<Item> getNext() {
      return next;
     }
-    public void setNext(Node<Item> next) {
-     this.next = next;
+    public void setNext(Node<Item> that) {
+     next = that;
     }
     // deals with previous element to the node
     public Node<Item> getPrev() {
      return prev;
     }
-    public void setPrev(Node<Item> prev) {
-     this.prev = prev;
+    public void setPrev(Node<Item> that) {
+     prev = that;
     }
     
    }

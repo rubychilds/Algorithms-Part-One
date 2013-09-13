@@ -1,10 +1,9 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.lang.UnsupportedOperationException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
  
- Item[] queue;
+ private Item[] queue;
  // construct an empty randomized queue
    public RandomizedQueue() { 
     queue = (Item[]) new Object[1];  
@@ -12,7 +11,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    
    // is the queue empty?
    public boolean isEmpty() {    
-    return size() == 0 ;
+    return size() == 0;
    }
    
    // return the number of items on the queue
@@ -87,7 +86,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
  @Override
  public void remove() {
-     throw new UnsupportedOperationException();
+     throw new java.lang.UnsupportedOperationException();
  }
   
    }

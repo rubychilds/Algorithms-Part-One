@@ -9,23 +9,23 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	
 	Item[] queue;
 	// construct an empty randomized queue
-   public RandomizedQueue(){ 
+   public RandomizedQueue() { 
 	   queue = (Item[]) new Object[1];  
    }
    
    // is the queue empty?
-   public boolean isEmpty(){	   
+   public boolean isEmpty() {	   
 	   return size() == 0 ;
    }
    
    // return the number of items on the queue
-   public int size(){
+   public int size() {
 	  return queue.length;
    }        
    
    // add the item
-   public void enqueue(Item item){
-	   if(!isEmpty()){
+   public void enqueue(Item item) {
+	   if (!isEmpty()) {
 		   int size = size();
 		   Item[] newItem = (Item[]) new Object[size+1];
 		   System.arraycopy(queue, 0, newItem, 0, size);
@@ -36,8 +36,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    }     
    
    // delete and return a random item
-   public Item dequeue(){
-	   if(!isEmpty()){
+   public Item dequeue() {
+	   if (!isEmpty()) {
 		   int i = StdRandom.uniform(size());
 		   Item removal = queue[i];
 		   queue[i] = queue[size()-1];
@@ -51,7 +51,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    }    
    
    // return (but do not delete) a random item
-   public Item sample(){
+   public Item sample() {
 	   if(!isEmpty()){
 		   int i = StdRandom.uniform(size());
 		   return queue[i];		   
@@ -60,14 +60,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    }               
    
    // return an independent iterator over items in random order
-   public Iterator<Item> iterator(){
+   public Iterator<Item> iterator() {
 	   
 	   return new randomIt();
    }
    
-   private class randomIt implements Iterator<Item>{
+   private class randomIt implements Iterator<Item> {
 	   
-	public randomIt(){
+	public randomIt() {
 		
 	}
 	@Override

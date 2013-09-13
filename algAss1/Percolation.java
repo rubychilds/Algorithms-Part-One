@@ -60,7 +60,7 @@ public class Percolation{
         return isOpen( i, j) && uf.connected(max*max , max*(i-1) + (j-1));
     }
     
-    public boolean percolates() {     // does the system percolate?
+    public boolean percolates() {
         return uf.connected(max*max, max*max+1);
     }
   }

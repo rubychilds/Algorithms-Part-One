@@ -26,6 +26,12 @@ public class Brute {
      return true;
  }
  
+ // function which checks that the points are in order - TO DO
+ private static boolean sorted(Point[] points){
+     return false;
+ }
+ 
+ // prints out points as a string
  private static void printLineSegment(Point[] points) {
      assert sorted(points);
      int end = points.length - 1;
@@ -35,6 +41,12 @@ public class Brute {
          }
      }
      System.out.println(points[end]);
+ }
+ 
+ // must set up drawing here - TO DO
+ private static void setupDrawing(){
+ 
+ 
  }
  
  // draws points and lines from one another

@@ -1,66 +1,116 @@
-package points;
-
-import stdlib.StdDraw;
+import java.util.Arrays;
 
 public class Brute {
  
- public static void main(String[] args){
-  
-  
+ // HELPER FUNCTIONS FOR SETUP
+ // this reads in the points from a given filename
+ private static Point[] readPoints(String filename) {
+      In filein = new In(filename);
+      int n = filein.readInt();
+      Point[] points = new Point[n];
+      for (int i = 0; i < n; i++)
+         points[i] = new Point(filein.readInt(), filein.readInt());
+      return points;
  }
  
+ private static void setupDrawing() {
+     // default it between 0-1.0
+     StdDraw.setXscale();
+     StdDraw.setYscale();
+     // must be no-negative else illegal arg excption thrown
+     StdDraw.setPenRadius(0.05); // random guess of 5 - may need altering
+     // need to show image - can pass through a paramter for how many milliseconds you want to show it for
+     StdDraw.show();
+ }
  
- private boolean collinear(Point[] points){
+ // COLLINERARITY
+ // checks whether points are collinear
+ private boolean collinear(Point[] points) {
      // if points length is 2 then we return true
-     if(Points.length == 2)
+     if (points.length == 2)
          return true;
-     else{
+     else {
          Point comparator = points[0];
          Double slope = comparator.slopeTo(points[1]);
          
-         for(int index = 2; index < points.length; index++){
-             if(slope != comparator.slppeTo(points[index]))
+         for (int index = 2; index < points.length; index++) {
+             if (slope != comparator.slopeTo(points[index]))
                  return false;
          }
+     return true;
+     }   
+ }
+ 
+ // ORDERING OF POINTS
+ // function which checks that the points are in order - TO DO
+ private static boolean sorted(Point[] points) {
+     int length = points.length;
+     // if we have a single el, or no elements, return true as sorted
+     if (length < 2)
+         return true;
+     for (int index = 0; index < length -1; index++) {
+         if(points[index].getX() <= points[index+1].getX() && points[index].getY() <= points[index+1].getY() )
+             continue;
+         else
+             return false;
      }
      return true;
  }
  
- // function which checks that the points are in order - TO DO
- private static boolean sorted(Point[] points){
-     return false;
- }
- 
- // prints out points as a string
+
+// OUTPUT AND DISPLAY FUNCTIONS 
+// prints out points as a string
  private static void printLineSegment(Point[] points) {
      assert sorted(points);
      int end = points.length - 1;
      if (end > 0) {
          for (int i = 0; i < end; i++) {
-             System.out.print(points[i] + " -> ");
+             StdOut.print(points[i] + " -> ");
+         }
+         StdOut.print(points[end]);
+     }
+ }
+
+ // draws points and lines from one another
+ private static void drawPoints(Point[] points) {
+     assert sorted(points);
+     for (Point p : points) {
+         p.draw();
+     }
+     for (Point p1 : points) {
+         for (Point p2 : points) {
+             if (p1 != p2)
+                 p1.drawTo(p2);
          }
      }
-     System.out.println(points[end]);
  }
  
- // must set up drawing here - TO DO
- private static void setupDrawing(){
- 
- 
+
+ private static void output(Point[] points){
+     // sort the points
+     Arrays.sort(points);
+     // prints to StdOut
+     printLineSegment(points);
+     // Display points on canvas
+     drawPoints(points);
  }
  
- // draws points and lines from one another
- private static void drawPoints(Point[] points){
-  
-  for(Point p : points){
-   p.draw();
+ // MAIN FUNCTION
+  public static void main(String[] args) {
+
+     // gets filename
+     String filename = args[0];
+     //reads in points
+     Point[] points = readPoints(filename);
+     // sets up the drawing
+     setupDrawing();
+     
+     int length = points.length;
+     
+     // need to do things here
+     
+     
+     // shows output
+     StdDraw.show(0);
   }
-  for(Point p1 : points){
-   for(Point p2 : points){
-    if(p1 != p2)
-     p1.drawTo(p2);
-   }
-  }
- }
- 
 }

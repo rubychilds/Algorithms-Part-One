@@ -1,6 +1,4 @@
-package points;
 import java.util.Comparator;
-import stdlib.StdDraw;
 
 public class Point implements Comparable<Point> {
     
@@ -30,10 +28,18 @@ public class Point implements Comparable<Point> {
     private int y;                              // y coordinate
     
     // create the point (x, y)
-    public void Point(int x, int y) {
+    public Point(int x, int y) {
         /* DO NOT MODIFY */
         this.x = x;
         this.y = y;
+    }
+    
+    public int getX(){
+        return x;
+    }
+    
+     public int getY(){
+        return y;
     }
     
     // plot this point to standard drawing
@@ -53,7 +59,7 @@ public class Point implements Comparable<Point> {
         if (this.y == that.y)
             return 0;
         else if (this.x == that.x)
-            return Double.POSITIVE INFINITY;
+            return Double.POSITIVE_INFINITY;
         return (that.y - this.y) /(that.x - this.x);
     }
     

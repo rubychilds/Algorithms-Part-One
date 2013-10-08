@@ -25,7 +25,7 @@ public class Brute {
  
  // COLLINERARITY
  // checks whether points are collinear
- private boolean collinear(Point[] points) {
+ private static boolean collinear(Point[] points) {
      // if points length is 2 then we return true
      if (points.length == 2)
          return true;
@@ -44,12 +44,13 @@ public class Brute {
  // ORDERING OF POINTS
  // function which checks that the points are in order - TO DO
  private static boolean sorted(Point[] points) {
+     
      int length = points.length;
      // if we have a single el, or no elements, return true as sorted
      if (length < 2)
          return true;
      for (int index = 0; index < length -1; index++) {
-         if(points[index].getX() <= points[index+1].getX() && points[index].getY() <= points[index+1].getY() )
+         if (points[index].getX() <= points[index+1].getX() && points[index+1].getY() <= points[index+1].getY() )
              continue;
          else
              return false;
@@ -67,7 +68,7 @@ public class Brute {
          for (int i = 0; i < end; i++) {
              StdOut.print(points[i] + " -> ");
          }
-         StdOut.print(points[end]);
+         StdOut.print(points[end] + "\n");
      }
  }
 
@@ -86,10 +87,10 @@ public class Brute {
  }
  
 
- private static void output(Point[] points){
+ private static void output(Point[] points) {
      // sort the points
      Arrays.sort(points);
-     // prints to StdOut
+// prints to StdOut
      printLineSegment(points);
      // Display points on canvas
      drawPoints(points);
@@ -105,11 +106,28 @@ public class Brute {
      // sets up the drawing
      setupDrawing();
      
+     Point[] threePoints = new Point[3];
+     Point[] fourPoints = new Point[4];
+     int[] indice = {0, 0, 0, 0};
      int length = points.length;
      
-     // need to do things here
-     
-     
+     for (indice[0] = 0; indice[0] < length; indice[0]++) {
+         points[indice[0]].draw();
+         for (indice[1] = indice[0] + 1; indice[1] < length; indice[1]++) {
+             for (indice[2] = indice[1] + 1; indice[2] < length; indice[2]++) {
+                 for (int g = 0; g < 3; g++) 
+                     threePoints[g] = points[indice[g]];
+                 if (!collinear(threePoints))
+                     continue;
+                 for (indice[3] = indice[2] + 1; indice[3] < length; indice[3]++) {
+                     for (int g = 0; g < 4; g++)
+                         fourPoints[g] = points[indice[g]];
+                     if (collinear(fourPoints))
+                         output(fourPoints);
+                 }
+             }
+         }
+        }
      // shows output
      StdDraw.show(0);
   }

@@ -6,4 +6,8 @@ These are my solutions to the course [Algorithms, Part One](https://class.course
 
 ###Week Two: [Randomized Queues and Deques](http://coursera.cs.princeton.edu/algs4/assignments/queues.html)
 
-###Week Three: [Pattern Recognition](http://coursera.cs.princeton.edu/algs4/assignments/collinear.html)
+###Week Three: [Pattern Recognition](http://coursera.cs.princeton.edu/algs4/assignments/collinear.html) - In Progress
+
+###Week Four: [8 Puzzle](http://coursera.cs.princeton.edu/algs4/assignments/8puzzle.html) - To Do
+
+###Week Three: [Kd-Trees](http://coursera.cs.princeton.edu/algs4/assignments/kdtree.html) - To Do

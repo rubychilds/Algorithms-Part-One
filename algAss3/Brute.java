@@ -46,11 +46,15 @@ public class Brute {
  private static boolean sorted(Point[] points) {
      
      int length = points.length;
+   //  StdOut.print("in sorted length: " + length);
      // if we have a single el, or no elements, return true as sorted
      if (length < 2)
          return true;
      for (int index = 0; index < length -1; index++) {
-         if (points[index].getX() <= points[index+1].getX() && points[index+1].getY() <= points[index+1].getY() )
+        // StdOut.print(" x: "  + points[index].getX() + " x next : " + points[index+1].getX() + " y: " + points[index+1].getY() + "y next: "  + points[index+1].getY());    
+         if (points[index].getY() == points[index+1].getY() &&  points[index].getX() <= points[index+1].getX() )
+             continue;
+         else if(points[index].getY() < points[index+1].getY())
              continue;
          else
              return false;
@@ -89,8 +93,9 @@ public class Brute {
 
  private static void output(Point[] points) {
      // sort the points
-     Arrays.sort(points);
+     Arrays.sort(points); // uses compareTo in Point
 // prints to StdOut
+     
      printLineSegment(points);
      // Display points on canvas
      drawPoints(points);
